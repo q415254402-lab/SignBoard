@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.spec
+
+# Node
+node_modules/
+frontend/dist/
+
+# Runtime
+uploads/
+data/
+player_cache/
+logs/
+config.json
+player_config.json
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Android
+android-player/app/build/
+android-player/.gradle/
+android-player/local.properties

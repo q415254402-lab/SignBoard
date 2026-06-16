@@ -1,0 +1,1 @@
+import{a as e}from"./router-duqlh64F.js";var t={list(){return e.get(`/schedules/list`)},count(){return e.get(`/schedules/count`)},create(t){return e.post(`/schedules`,t)},update(t,n){return e.put(`/schedules/${t}`,n)},patch(t,n){return e.patch(`/schedules/${t}`,n)},remove(t){return e.delete(`/schedules/${t}`)}};export{t};

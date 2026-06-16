@@ -1,0 +1,1 @@
+import{a as e}from"./router-duqlh64F.js";var t={list(){return e.get(`/layouts/list`)},get(t){return e.get(`/layouts/${t}`)},create(t){return e.post(`/layouts`,t)},update(t,n){return e.put(`/layouts/${t}`,n)},remove(t){return e.delete(`/layouts/${t}`)}};export{t as layoutApi};
