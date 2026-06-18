@@ -56,7 +56,7 @@ class ConfigReceiver : BroadcastReceiver() {
                     editor.putString("server_url", serverUrl)
                 }
                 editor.putString("display_name", displayName)
-                editor.apply()
+                editor.commit()
 
                 Log.i(TAG, "配置已写入: url=$serverUrl, name=$displayName, autoStart=$autoStart")
                 Toast.makeText(context, "配置已更新", Toast.LENGTH_SHORT).show()
@@ -73,7 +73,7 @@ class ConfigReceiver : BroadcastReceiver() {
 
             ACTION_CONFIG_CLEAR -> {
                 val prefs = context.getSharedPreferences("signboard", Context.MODE_PRIVATE)
-                prefs.edit().clear().apply()
+                prefs.edit().clear().commit()
                 Toast.makeText(context, "配置已清除", Toast.LENGTH_SHORT).show()
             }
 
@@ -139,7 +139,7 @@ class ConfigReceiver : BroadcastReceiver() {
                         prefs.edit()
                             .putInt("display_id", displayId)
                             .putString("player_token", playerToken)
-                            .apply()
+                            .commit()
 
                         Log.i(TAG, "注册成功: displayId=$displayId")
                     }

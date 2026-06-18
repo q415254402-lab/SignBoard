@@ -42,6 +42,7 @@ class SignBoardApp : Application() {
             defaultHandler?.uncaughtException(thread, exception)
         }
         
+        com.signboard.player.api.ApiClient.init(this)
         Log.d("SignBoardApp", "应用启动")
     }
 }

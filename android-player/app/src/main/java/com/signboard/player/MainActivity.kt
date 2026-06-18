@@ -44,14 +44,18 @@ class MainActivity : AppCompatActivity() {
         val savedToken = prefs.getString("player_token", "")
         val savedUrl = prefs.getString("server_url", "")
 
+        android.util.Log.d("MainActivity", "SharedPreferences 读取: displayId=$savedDisplayId, token=${savedToken?.take(10)}..., url=$savedUrl")
+
         if (savedDisplayId > 0 && !savedToken.isNullOrEmpty() && !isSettingsMode) {
-            // 必须先设置服务器地址，再跳转播放器
             val urlToUse = if (!savedUrl.isNullOrEmpty()) savedUrl else "http://192.168.1.100:8000"
             android.util.Log.d("MainActivity", "自动连接: displayId=$savedDisplayId, url=$urlToUse")
             ApiClient.updateBaseUrl(urlToUse)
+            android.util.Log.d("MainActivity", "ApiClient.baseUrl 已设为: ${ApiClient.getBaseUrl()}")
             launchPlayer(savedDisplayId, savedToken)
             return
         }
+
+        android.util.Log.d("MainActivity", "无已保存配置，显示设置界面")
 
         // 无配置，显示配置界面
         setContentView(R.layout.activity_main)
@@ -157,7 +161,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val prefs = getSharedPreferences("signboard", MODE_PRIVATE)
-        prefs.edit().putString("server_url", serverUrl).putString("display_name", displayName).apply()
+        prefs.edit().putString("server_url", serverUrl).putString("display_name", displayName).commit()
 
         ApiClient.updateBaseUrl(serverUrl)
 
@@ -182,7 +186,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (response.isSuccessful) {
                     val data = response.body()!!
-                    prefs.edit().putInt("display_id", data.id).putString("player_token", data.playerToken).apply()
+                    prefs.edit().putInt("display_id", data.id).putString("player_token", data.playerToken).commit()
                     launchPlayer(data.id, data.playerToken ?: "")
                 } else {
                     Toast.makeText(this@MainActivity, "注册失败: ${response.code()}", Toast.LENGTH_LONG).show()
